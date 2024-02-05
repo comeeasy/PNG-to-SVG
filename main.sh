@@ -1,7 +1,10 @@
+#! /bin/bash
+
 echo "Various steps to get the final svg format output."
 
 echo "01 - thresholding"
-python ./Src/01-ResizeThreshold.py --inDir "./Input" --outDir "./Src/temp/01" --ResizeFlag True --ResizeH 500 --ResizeW 500
+# python ./Src/01-ResizeThreshold.py --inDir "./Input" --outDir "./Src/temp/01" --ResizeFlag False --ResizeH 4096 --ResizeW 4096
+python ./Src/01-ResizeThreshold.py --inDir $1 --outDir "./Src/temp/01" --ResizeFlag False --ResizeH 4096 --ResizeW 4096
 
 echo "02 - png2ppm"
 inputdir='./Src/temp/01/'
@@ -60,8 +63,11 @@ for g in $inputdir*
 do
     FILE=$(basename "${g}")
     FILE1="${FILE%%.*}"
-    #echo $outputdir$FILE1
+    echo $outputdir$FILE1
     convert $g -colorspace Gray -resize 256x256 $outputdir$FILE1".png"
 done
 
-rm -rf "./Src/temp"
+echo "12 - bèzier to line segments for training"
+python bezier2lineseg.py $2
+
+# rm -rf Src/temp/*
