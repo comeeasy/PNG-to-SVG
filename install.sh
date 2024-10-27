@@ -6,9 +6,11 @@ sudo apt install intltool imagemagick libmagickcore-dev pstoedit libpstoedit-dev
 
 git clone https://github.com/autotrace/autotrace.git
 cd ./autotrace
-./autogen.sh
-LD_LIBRARY_PATH=/usr/local/lib ./configure --prefix=/usr
+bash autogen.sh
+bash configure
 make
+./autotrace --version	# test if it can print its version, before installing.
 sudo make install
+sudo ldconfig
 
 autotrace -v
