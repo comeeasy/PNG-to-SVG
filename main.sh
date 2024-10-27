@@ -30,7 +30,7 @@ for g in $inputdir*
 do
     FILE1=$(basename "${g}")
     FILE1="${FILE1%%.*}"
-    autotrace -centerline -color-count 2 -output-file $"$outputdir/$FILE1.svg" -output-format SVG $inputdir$(basename "${g}")
+    autotrace -centerline -color-count 2 -output-file $"$outputdir/$FILE1.svg" -output-format SVG $inputdir$(basename "${g}") || echo "autotrace failed"
 done
 
 echo "04 - svg - Cleaning"
@@ -50,13 +50,5 @@ python ./Src/08-ReorderPath-Mat.py --inDir "./Src/temp/07/" --outDir "./Src/temp
 
 echo "09 - svg file cleaning"
 python ./Src/09-svgCleaning.py --inDir "./Src/temp/08/" --outDir "./Src/temp/09"
-
-echo "10 - svg - TUBerlin style"
-outputdir=$2
-if [ ! -e $"$outputdir" ]
-then
-   mkdir $"$outputdir"
-fi
-python ./Src/10-TUBerlinStyleSvg.py --inDir "./Src/temp/09/" --outDir $outputdir --refSVG "./Src/Ref-svg.svg" --strokeWidth 1.0
 
 rm -rf ./Src/temp/*
