@@ -7,7 +7,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--inDir', type=str, default='../Input', help='Input directory.')
 parser.add_argument('--outDir', type=str, default='./temp/01', help='Output directory.')
-parser.add_argument('--ResizeFlag', type=bool, default=True, help='Output directory.')
+parser.add_argument('--ResizeFlag', type=bool, default=False, help='Output directory.')
 parser.add_argument('--ResizeH', type=int, default=300, help='Height.')
 parser.add_argument('--ResizeW', type=int, default=300, help='Width.')
 args = parser.parse_args()
